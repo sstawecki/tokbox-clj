@@ -1,7 +1,7 @@
 (defproject tokbox-clj "0.1.0-SNAPSHOT"
 
   :description "Learning Clojure"
-  :url "https://tokbox-clj.herokuapp.com/"
+  :url "http://example.com/FIXME"
 
   :dependencies [[org.clojure/clojure "1.7.0"]
                  [selmer "1.0.0"]
