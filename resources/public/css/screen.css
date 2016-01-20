@@ -58,12 +58,13 @@ body {
 {% endif %}
 
 #publisher, #subscriber{
-    width: 250px;
-    height: 250px;
-    margin: 5px;
+
 }
 
 .videobox {
     float: left;
     text-align: center;
+    width: 250px;
+    height: 250px;
+    margin: 5px;
 }
