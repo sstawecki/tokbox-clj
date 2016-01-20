@@ -49,7 +49,7 @@
      :compiler
      {:output-to "target/cljsbuild/public/js/app.js"
       :output-dir "target/cljsbuild/public/js/out"
-      :externs ["react/externs/react.js"]
+      :externs ["react/externs/react.js" "resources/externs.js"] 
       :pretty-print true}}}}
   
   :profiles
