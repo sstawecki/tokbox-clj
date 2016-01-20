@@ -43,9 +43,32 @@
     [:div.col-md-12
      "this is the story of tokbox-clj... work in progress"]]])
 
+
+;============= My spot...
+
+; currently unused
+(defonce tokboxData
+         (atom {:apiKey "45460942",
+                :token "T1==cGFydG5lcl9pZD00NTQ2MDk0MiZzaWc9ZGJmNzgxNzc0NjVkZjQ5YmJlMDRkODVjYzE3YjZkYjY5MjlkNWYyMDpzZXNzaW9uX2lkPTJfTVg0ME5UUTJNRGswTW41LU1UUTFNekl5TmprMU1qSTRPWDVwTlZSeFdTc3JhVkV4TjNrelVFMUJlRFZGS3pGUGVYSi1mZyZjcmVhdGVfdGltZT0xNDUzMjI3MDU2JnJvbGU9cHVibGlzaGVyJm5vbmNlPTE0NTMyMjcwNTYuODUwNDcxNjIwNzExOQ==",
+                :sessionId "2_MX40NTQ2MDk0Mn5-MTQ1MzIyNjk1MjI4OX5pNVRxWSsraVExN3kzUE1BeDVFKzFPeXJ-fg"}))
+
+
+(js* "var session = OT.initSession('45460942', '2_MX40NTQ2MDk0Mn5-MTQ1MzIyNjk1MjI4OX5pNVRxWSsraVExN3kzUE1BeDVFKzFPeXJ-fg');" )
+
+(js* "  session.on('streamCreated', function(event) { session.subscribe(event.stream, 'subscriber', { insertMode: 'append', width: '100%', height: '100%' }); });")
+
+(js* "  session.on('sessionDisconnected', function(event) {  console.log('You were disconnected from the session.', event.reason); });")
+
+(js* "  session.connect('T1==cGFydG5lcl9pZD00NTQ2MDk0MiZzaWc9ZGJmNzgxNzc0NjVkZjQ5YmJlMDRkODVjYzE3YjZkYjY5MjlkNWYyMDpzZXNzaW9uX2lkPTJfTVg0ME5UUTJNRGswTW41LU1UUTFNekl5TmprMU1qSTRPWDVwTlZSeFdTc3JhVkV4TjNrelVFMUJlRFZGS3pGUGVYSi1mZyZjcmVhdGVfdGltZT0xNDUzMjI3MDU2JnJvbGU9cHVibGlzaGVyJm5vbmNlPTE0NTMyMjcwNTYuODUwNDcxNjIwNzExOQ==', function(error) { if (!error) { var publisher = OT.initPublisher('publisher', { insertMode: 'append', width: '100%', height: '100%' }); session.publish(publisher); } else { console.log('There was an error connecting to the session: ', error.code, error.message); }});")
+
+
 (defn home-page []
   [:div.container
-   [:h1 "Hello"]])
+   [:div.videobox [:div "Publisher"] [:div#publisher]]
+   [:div.videobox [:div "Subscriber"] [:div#subscriber]]])
+
+
+;============= end of my spot...
 
 (def pages
   {:home #'home-page
@@ -81,7 +104,7 @@
   (GET (str js/context "/docs") {:handler #(session/put! :docs %)}))
 
 (defn mount-components []
-  (reagent/render [#'navbar] (.getElementById js/document "navbar"))
+  ;(reagent/render [#'navbar] (.getElementById js/document "navbar"))
   (reagent/render [#'page] (.getElementById js/document "app")))
 
 (defn init! []
