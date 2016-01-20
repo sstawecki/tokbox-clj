@@ -378,4 +378,11 @@ var OT = {
     "warn": function () {},
     "webrtcTest": function () {},
     "noConflict": function () {}
-}
+};
+
+var session = {
+    on: function () {},
+    publish: function () {},
+    subscribe: function () {},
+    connect: function() {}
+};
