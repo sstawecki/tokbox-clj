@@ -46,30 +46,35 @@
 
 ;============= My spot...
 
-; currently unused
+
 (defonce tokboxData
          (atom {:apiKey "45460942",
-                :token "2_MX40NTQ2MDk0Mn5-MTQ1MzMxMzUyNzEwMH5IZStzKytUSnljNzBjSkMwUU51V0dBcDl-fg",
-                :sessionId "T1==cGFydG5lcl9pZD00NTQ2MDk0MiZzaWc9MGMzMzU4MTlhNjJmMTNhN2Q1Yjk4NTlhMWNlYWI5ZDJkNDBmNGFiMDpzZXNzaW9uX2lkPTJfTVg0ME5UUTJNRGswTW41LU1UUTFNek14TXpVeU56RXdNSDVJWlN0ekt5dFVTbmxqTnpCalNrTXdVVTUxVjBkQmNEbC1mZyZjcmVhdGVfdGltZT0xNDUzMzE0Mzc4JnJvbGU9cHVibGlzaGVyJm5vbmNlPTE0NTMzMTQzNzguNjMzMjE3OTU4MTY0MjQ="}))
+                :token "1_MX40NTQ2MDk0Mn5-MTQ1MzM4OTgyODI1MH5rY2lkTXl0UVY0UVk3RmhZTnNWSEgyZUd-fg",
+                :sessionId "T1==cGFydG5lcl9pZD00NTQ2MDk0MiZzaWc9ZmM3NDU5NTY4MDgxNWE4YTI0Mzk0MjVjOWFjYzEyNTEwYTBiMzY1MDpzZXNzaW9uX2lkPTFfTVg0ME5UUTJNRGswTW41LU1UUTFNek00T1RneU9ESTFNSDVyWTJsa1RYbDBVVlkwVVZrM1JtaFpUbk5XU0VneVpVZC1mZyZjcmVhdGVfdGltZT0xNDUzMzg5ODI4JnJvbGU9cHVibGlzaGVyJm5vbmNlPTE0NTMzODk4MjguMjc1Mzc3NjQ2ODQwMA=="}))
 
+; session.initSession
 (def session (.OT.initSession js/window (:apiKey @tokboxData) (:token @tokboxData)))
 
-(.on session "screamCreated" (defn onStreamCreated [event]
-                               (.alert js/window "asd")
-                               (.alert js/window "asd2")
-                               (println "asd ")))
+; session.on('streamCreated', callback)
+(.on session "streamCreated" (fn [event]
+                               (do
+                                 (.log js/console "Stream created")
+                                 (.subscribe session (aget event "stream") "subscriber" (js-obj "insertMode" "append", "width" "100%", "height" "100%")))
+                               ))
 
-(.log js/console session)
+; session.connect(sessionId, callback)
+(.connect session (:sessionId @tokboxData) (fn [error]
+                                             (if-not error
+                                               (do
+                                                 (.log js/console "Connected without errors")
+                                                 (def publisher (.OT.initPublisher js/window "publisher" (js-obj "insertMode" "append", "width" "100%", "height" "100%")))
+                                                 (.publish session publisher))
+                                               (.log js/console "There was an error connecting to the session: error.code/error.message"))))
 
+; session.on('sessionDisconnected', callback)
+(.on session "sessionDisconnected" (fn [event]
+                                 (.log js/console "You were disconnected from the session (event.reason")))
 
-;(js* "  session.on('streamCreated', function(event) { session.subscribe(event.stream, 'subscriber', { insertMode: 'append', width: '100%', height: '100%' }); });")
-
-;(js* "  session.on('sessionDisconnected', function(event) {  console.log('You were disconnected from the session.', event.reason); });")
-
-
-(.connect session (:sessionId @tokboxData) (defn onConnect [error] (.log js/console "increible!"))) 
-
-;(js* "  session.connect('T1==cGFydG5lcl9pZD00NTQ2MDk0MiZzaWc9ZGJmNzgxNzc0NjVkZjQ5YmJlMDRkODVjYzE3YjZkYjY5MjlkNWYyMDpzZXNzaW9uX2lkPTJfTVg0ME5UUTJNRGswTW41LU1UUTFNekl5TmprMU1qSTRPWDVwTlZSeFdTc3JhVkV4TjNrelVFMUJlRFZGS3pGUGVYSi1mZyZjcmVhdGVfdGltZT0xNDUzMjI3MDU2JnJvbGU9cHVibGlzaGVyJm5vbmNlPTE0NTMyMjcwNTYuODUwNDcxNjIwNzExOQ==', function(error) { if (!error) { var publisher = OT.initPublisher('publisher', { insertMode: 'append', width: '100%', height: '100%' }); session.publish(publisher); } else { console.log('There was an error connecting to the session: ', error.code, error.message); }});")
 
 
 (defn home-page []
