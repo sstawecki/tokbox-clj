@@ -30,7 +30,9 @@
                  [org.clojure/core.async "0.2.374"]
                  [cljs-ajax "0.5.3"]
                  [org.webjars/webjars-locator-jboss-vfs "0.1.0"]
-                 [luminus-immutant "0.1.0"]]
+                 [luminus-immutant "0.1.0"]
+
+                 [cljs-http "0.1.39"]]
 
   :min-lein-version "2.0.0"
   :uberjar-name "tokbox-clj.jar"

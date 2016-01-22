@@ -24,6 +24,7 @@
     <orderEntry type="library" name="Leiningen: clj-time:0.9.0" level="project" />
     <orderEntry type="library" name="Leiningen: clj-tuple:0.2.2" level="project" />
     <orderEntry type="library" name="Leiningen: cljs-ajax:0.5.3" level="project" />
+    <orderEntry type="library" name="Leiningen: cljs-http:0.1.39" level="project" />
     <orderEntry type="library" name="Leiningen: cljsjs/react:0.13.3-1" level="project" />
     <orderEntry type="library" name="Leiningen: clojure-complete:0.2.3" level="project" />
     <orderEntry type="library" name="Leiningen: clojure-msgpack:1.1.2" level="project" />
@@ -83,6 +84,7 @@
     <orderEntry type="library" name="Leiningen: net.colourcoding/poppea:0.2.1" level="project" />
     <orderEntry type="library" name="Leiningen: net.incongru.watchservice/barbary-watchservice:1.0" level="project" />
     <orderEntry type="library" name="Leiningen: net.java.dev.jna/jna:3.2.2" level="project" />
+    <orderEntry type="library" name="Leiningen: noencore:0.2.0" level="project" />
     <orderEntry type="library" name="Leiningen: ns-tracker:0.3.0" level="project" />
     <orderEntry type="library" name="Leiningen: org.apache.commons/commons-compress:1.9" level="project" />
     <orderEntry type="library" name="Leiningen: org.apache.commons/commons-lang3:3.4" level="project" />
